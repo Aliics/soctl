@@ -10,7 +10,7 @@ import System.Environment (getArgs)
 progs :: Map.Map String ([String] -> IO ())
 progs = Map.fromList 
     [ ("help", help)
-    , ("query", query)
+    , ("query", queryProg)
     ]
 
 subprog :: IO ()
