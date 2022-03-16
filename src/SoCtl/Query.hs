@@ -1,16 +1,38 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module SoCtl.Query
     ( query
     , queryProg
-    , QueryResponse (..)
     ) where
-data QueryResponse = QueryResponse Int [String] deriving (Eq, Show)
+import SoCtl.QueryResponse
+import Network.HTTP.Query
 
+rootUri :: String
+rootUri = "https://api.stackexchange.com/2.3"
+
+searchUri :: (String, Query)
+searchUri = 
+  (uri, keys)
+  where 
+    uri = rootUri +/+ "search/advanced"
+    keys = 
+      [ makeItem "site" "stackoverflow"
+      , makeItem "order" "desc"
+      , makeItem "sort" "activity"
+      ]
+
+-- Query the StackExchange api pointing to StackOverflow.
+-- Using the first argument as the language to query against.
 query :: [String] -> IO QueryResponse
-query _ = pure (QueryResponse 0 [])
-
+query as = do
+  let uri = fst searchUri
+      keys = snd searchUri ++ [makeItem "tagged" (head as)]
+  res <- webAPIQuery uri keys
+  pure $ queryResp res
+    
 -- Run the query function as a "prog". This means to simply output the result.
 -- A shorthand to displaying the result in a nice format.
 queryProg :: [String] -> IO ()
-queryProg ss = do
-  (QueryResponse _ os) <- query ss
-  mapM_ putStrLn os 
+queryProg as = do
+  (QueryResponse _ os) <- query as
+  mapM_ putStrLn os
