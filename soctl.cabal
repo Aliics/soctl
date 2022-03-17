@@ -29,6 +29,7 @@ library
       SoCtl.Args
       SoCtl.Help
       SoCtl.Query
+      SoCtl.Query.Constants
       SoCtl.QueryResponse
   other-modules:
       Paths_soctl

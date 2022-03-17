@@ -4,13 +4,11 @@ module SoCtl.Query
     ( query
     , queryProg
     ) where
-import SoCtl.QueryResponse
-import Network.HTTP.Query
 import SoCtl.Args (argByName)
+import SoCtl.QueryResponse
+import SoCtl.Query.Constants (rootUri)
+import Network.HTTP.Query
 import Data.Maybe (maybeToList)
-
-rootUri :: String
-rootUri = "https://api.stackexchange.com/2.3"
 
 searchUri :: (String, Query)
 searchUri = 
