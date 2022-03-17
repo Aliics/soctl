@@ -28,7 +28,7 @@ searchUri =
 query :: [String] -> IO QueryResponse
 query as = do
   let uri = fst searchUri
-      maybeLang = fmap (makeItem "tagged") (argByName "lang" as)
+      maybeLang = makeItem "tagged" <$> argByName "lang" as
       keys = snd searchUri ++ maybeToList maybeLang
   res <- webAPIQuery uri keys
   pure $ queryResp res
