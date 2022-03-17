@@ -6,6 +6,8 @@ module SoCtl.Query
     ) where
 import SoCtl.QueryResponse
 import Network.HTTP.Query
+import SoCtl.Args (argByName)
+import Data.Maybe (maybeToList)
 
 rootUri :: String
 rootUri = "https://api.stackexchange.com/2.3"
@@ -26,7 +28,8 @@ searchUri =
 query :: [String] -> IO QueryResponse
 query as = do
   let uri = fst searchUri
-      keys = snd searchUri ++ [makeItem "tagged" (head as)]
+      maybeLang = fmap (makeItem "tagged") (argByName "lang" as)
+      keys = snd searchUri ++ maybeToList maybeLang
   res <- webAPIQuery uri keys
   pure $ queryResp res
     

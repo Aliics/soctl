@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       SoCtl
+      SoCtl.Args
       SoCtl.Help
       SoCtl.Query
       SoCtl.QueryResponse
@@ -61,6 +62,7 @@ test-suite soctl-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      ArgsSpec
       QuerySpec
       Paths_soctl
   hs-source-dirs:
