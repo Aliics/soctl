@@ -35,5 +35,5 @@ getQueryResp as = do
 -- A shorthand to displaying the result in a nice format.
 query :: [String] -> IO ()
 query as = do
-  (QueryResponse _ os) <- getQueryResp as
-  mapM_ putStrLn os
+  (QueryResponse _ qs) <- getQueryResp as
+  mapM_ print qs
