@@ -2,7 +2,7 @@
 
 module SoCtl.Query
     ( query
-    , queryProg
+    , getQueryResp
     ) where
 import SoCtl.Args (argByName)
 import SoCtl.QueryResponse
@@ -23,8 +23,8 @@ searchUri =
 
 -- Query the StackExchange api pointing to StackOverflow.
 -- Using the first argument as the language to query against.
-query :: [String] -> IO QueryResponse
-query as = do
+getQueryResp :: [String] -> IO QueryResponse
+getQueryResp as = do
   let uri = fst searchUri
       maybeLang = makeItem "tagged" <$> argByName "lang" as
       keys = snd searchUri ++ maybeToList maybeLang
@@ -33,7 +33,7 @@ query as = do
     
 -- Run the query function as a "prog". This means to simply output the result.
 -- A shorthand to displaying the result in a nice format.
-queryProg :: [String] -> IO ()
-queryProg as = do
-  (QueryResponse _ os) <- query as
+query :: [String] -> IO ()
+query as = do
+  (QueryResponse _ os) <- getQueryResp as
   mapM_ putStrLn os

@@ -3,4 +3,4 @@ module Main where
 import qualified SoCtl
 
 main :: IO ()
-main = SoCtl.subprog
+main = SoCtl.subProg
