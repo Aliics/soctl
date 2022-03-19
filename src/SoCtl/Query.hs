@@ -5,7 +5,7 @@ module SoCtl.Query
     , getQueryResp
     ) where
 import SoCtl.Args (argByName)
-import SoCtl.QueryResponse
+import SoCtl.Query.Response
 import SoCtl.Query.Constants (rootUri)
 import Network.HTTP.Query
 import Data.Maybe (maybeToList)
@@ -23,7 +23,7 @@ searchUri =
 
 -- Query the StackExchange api pointing to StackOverflow.
 -- Using the first argument as the language to query against.
-getQueryResp :: [String] -> IO QueryResponse
+getQueryResp :: [String] -> IO Response
 getQueryResp as = do
   let uri = fst searchUri
       maybeLang = makeItem "tagged" <$> argByName "lang" as
@@ -35,5 +35,5 @@ getQueryResp as = do
 -- A shorthand to displaying the result in a nice format.
 query :: [String] -> IO ()
 query as = do
-  (QueryResponse _ qs) <- getQueryResp as
+  (Response _ qs) <- getQueryResp as
   mapM_ print qs

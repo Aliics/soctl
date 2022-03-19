@@ -1,15 +1,15 @@
 {-# LANGUAGE DeriveGeneric, OverloadedStrings #-}
 
-module SoCtl.QueryResponse
+module SoCtl.Query.Response
     ( queryResp
-    , QueryResponse (..)
+    , Response (..)
     ) where
 
 import SoCtl.Question
 import Data.Aeson
 import GHC.Generics
 
-data QueryResponse = QueryResponse Int [Question] deriving (Eq, Show)
+data Response = Response Int [Question] deriving (Eq, Show)
 
 -- SoItem is a record representing StackOverflow JSON items.
 data SoItem = SoItem
@@ -33,7 +33,7 @@ newtype SoResponse = SoResponse
 
 instance FromJSON SoResponse
 
-queryResp :: Maybe SoResponse -> QueryResponse
-queryResp Nothing = QueryResponse 0 []
+queryResp :: Maybe SoResponse -> Response
+queryResp Nothing = Response 0 []
 queryResp (Just SoResponse{items=items}) =
-  QueryResponse (length items) (map fromSoItem items)
+  Response (length items) (map fromSoItem items)

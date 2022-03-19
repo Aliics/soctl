@@ -30,7 +30,7 @@ library
       SoCtl.Help
       SoCtl.Query
       SoCtl.Query.Constants
-      SoCtl.QueryResponse
+      SoCtl.Query.Response
       SoCtl.Question
   other-modules:
       Paths_soctl
