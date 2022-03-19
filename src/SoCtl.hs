@@ -2,15 +2,17 @@ module SoCtl
     ( subProg
     ) where
 
-import SoCtl.Help
-import SoCtl.Query
+import SoCtl.Help (help)
+import SoCtl.Search (search)
+import SoCtl.Question (question)
 import qualified Data.Map.Lazy as Map
 import System.Environment (getArgs)
 
 progs :: Map.Map String ([String] -> IO ())
 progs = Map.fromList 
     [ ("help", help)
-    , ("query", query)
+    , ("search", search)
+    , ("question", question)
     ]
 
 subProg :: IO ()

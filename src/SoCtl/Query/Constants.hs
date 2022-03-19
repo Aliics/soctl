@@ -1,4 +1,3 @@
--- Query constant values such as URIs.
 module SoCtl.Query.Constants
   ( rootUri
   ) where

@@ -1,4 +1,4 @@
-module ArgsSpec 
+module SoCtl.ArgsSpec 
     ( spec
     ) where
 import Test.Hspec
@@ -7,7 +7,7 @@ import SoCtl.Args (argByName)
 
 spec :: Spec
 spec = 
-  describe "Args.argByName" $ do
+  describe "argByName" $ do
     it "can find argument when alone" $ do
       let x = fromJust $ argByName "arg1" ["--arg1", "foo"]
       x `shouldBe` "foo"

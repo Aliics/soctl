@@ -1,39 +1,16 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module SoCtl.Query
-    ( query
-    , getQueryResp
+    ( queryUri
     ) where
-import SoCtl.Args (argByName)
-import SoCtl.Query.Response
-import SoCtl.Query.Constants (rootUri)
+import SoCtl.Query.Constants
 import Network.HTTP.Query
-import Data.Maybe (maybeToList)
 
-searchUri :: (String, Query)
-searchUri = 
+queryUri :: String -> (String, Query)
+queryUri p = 
   (uri, keys)
   where 
-    uri = rootUri +/+ "search/advanced"
+    uri = rootUri +/+ p
     keys = 
       [ makeItem "site" "stackoverflow"
       , makeItem "order" "desc"
       , makeItem "sort" "activity"
       ]
-
--- Query the StackExchange api pointing to StackOverflow.
--- Using the first argument as the language to query against.
-getQueryResp :: [String] -> IO Response
-getQueryResp as = do
-  let uri = fst searchUri
-      maybeLang = makeItem "tagged" <$> argByName "lang" as
-      keys = snd searchUri ++ maybeToList maybeLang
-  res <- webAPIQuery uri keys
-  pure $ queryResp res
-    
--- Run the query function as a "prog". This means to simply output the result.
--- A shorthand to displaying the result in a nice format.
-query :: [String] -> IO ()
-query as = do
-  (Response _ qs) <- getQueryResp as
-  mapM_ print qs

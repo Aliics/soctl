@@ -32,6 +32,8 @@ library
       SoCtl.Query.Constants
       SoCtl.Query.Response
       SoCtl.Question
+      SoCtl.Question.Types
+      SoCtl.Search
   other-modules:
       Paths_soctl
   hs-source-dirs:
@@ -64,9 +66,9 @@ test-suite soctl-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      ArgsSpec
-      QuerySpec
-      QuestionSpec
+      SoCtl.ArgsSpec
+      SoCtl.QuestionSpec
+      SoCtl.SearchSpec
       Paths_soctl
   hs-source-dirs:
       test

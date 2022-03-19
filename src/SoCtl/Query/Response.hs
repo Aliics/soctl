@@ -5,7 +5,7 @@ module SoCtl.Query.Response
     , Response (..)
     ) where
 
-import SoCtl.Question
+import SoCtl.Question.Types
 import Data.Aeson
 import GHC.Generics
 

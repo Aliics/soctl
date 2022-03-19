@@ -1,8 +1,19 @@
 module SoCtl.Question 
-    ( Question (..)
+    ( question
+    , getQuestionResp
     ) where
+import Network.HTTP.Query
+import SoCtl.Query.Constants (rootUri)
+import SoCtl.Query (queryUri)
+import SoCtl.Query.Response
 
-data Question = Question Int String deriving Eq
+getQuestionResp :: [String] -> IO Response
+getQuestionResp as = do
+  let qu = queryUri $ "questions" +/+ head as
+  res <- uncurry webAPIQuery qu
+  pure $ queryResp res
 
-instance Show Question where
-  show (Question n s) = show n ++ ") " ++ s
+question :: [String] -> IO ()
+question as = do
+  (Response _ (q:_)) <- getQuestionResp as
+  print q
