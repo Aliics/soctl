@@ -5,7 +5,6 @@ import Data.List (elemIndex)
 
 argByName :: String -> [String] -> Maybe String
 argByName _ [] = Nothing
-argByName _ [_] = Nothing
 argByName a as =
   case elemIndex ("--" ++ a) as of
     Nothing -> Nothing

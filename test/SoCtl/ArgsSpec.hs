@@ -26,3 +26,7 @@ spec =
     it "cannot find argument with no args" $ do
       let x = argByName "arg" []
       x `shouldSatisfy` isNothing
+
+    it "cannot find argument with one arg" $ do
+      let x = argByName "arg" ["arg1"]
+      x `shouldSatisfy` isNothing
