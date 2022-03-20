@@ -30,7 +30,7 @@ library:
   source-dirs: src
 
 executables:
-  soctl-exe:
+  soctl:
     main:                Main.hs
     source-dirs:         app
     ghc-options:

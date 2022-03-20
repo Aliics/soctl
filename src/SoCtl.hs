@@ -23,4 +23,9 @@ callProg :: [String] -> IO ()
 callProg [] = help []
 callProg as = do
   let prog = head as
-  mapM_ (\x -> x $ tail as) (Map.lookup prog progs)
+      maybeProg = Map.lookup prog progs
+  case maybeProg of
+    Just a -> a $ tail as
+    Nothing -> do
+      putStrLn $ prog ++ " is not a command.\n" 
+      callProg []

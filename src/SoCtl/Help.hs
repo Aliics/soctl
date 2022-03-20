@@ -9,5 +9,6 @@ help :: [String] -> IO ()
 help _ = putStrLn $
   "soctl help page" \/
   "========================================================================" \/
-  " - help  :: Shows this help message" \/
-  " - query :: Query tool for generate query searching"
+  " - help     :: Shows this help message" \/
+  " - search   :: Search tool for general question searching" \/
+  " - question :: Look at questions and answers"

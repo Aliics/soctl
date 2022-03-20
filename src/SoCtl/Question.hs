@@ -15,5 +15,7 @@ getQuestionResp as = do
 
 question :: [String] -> IO ()
 question as = do
-  (Response _ (q:_)) <- getQuestionResp as
-  print q
+  resp <- getQuestionResp as
+  case resp of
+    Response _ (q:_) -> print q
+    _ -> putStrLn "Question not found"
