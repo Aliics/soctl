@@ -1,8 +1,8 @@
 module SoCtl.Query
     ( queryUri
     ) where
-import           Network.HTTP.Query
-import           SoCtl.Query.Constants
+import           Network.HTTP.Query    (Query, makeItem, (+/+))
+import           SoCtl.Query.Constants (rootUri)
 
 queryUri :: String -> (String, Query)
 queryUri p =

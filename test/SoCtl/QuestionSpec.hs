@@ -15,4 +15,4 @@ spec = do
   describe "getQuestionResp" $ do
     it "can query a question" $ do
       qs <- getQuestionResp ["44965"]
-      qs `shouldBe` Just (Question 44965 "What is a monad?")
+      qs `shouldBe` Just (Question 44965 "What is a monad?", [])

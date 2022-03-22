@@ -2,20 +2,19 @@
 
 module SoCtl.Question.Types
     ( Question (..)
-    , questionFromObject
-    , questionFromItemsObject
+    , questionsFromItemsObject
     ) where
-import           Data.Aeson
+import           Data.Aeson         (Object)
 import           Data.Maybe         (mapMaybe, maybeToList)
-import           Network.HTTP.Query
+import           Network.HTTP.Query (lookupKey)
 
 data Question = Question Int String deriving Eq
 
 instance Show Question where
   show (Question n s) = show n ++ ") " ++ s
 
-questionFromItemsObject :: Object -> [Question]
-questionFromItemsObject o = do
+questionsFromItemsObject :: Object -> [Question]
+questionsFromItemsObject o = do
   is <- maybeToList (lookupKey "items" o :: Maybe [Object])
   mapMaybe questionFromObject is
 
