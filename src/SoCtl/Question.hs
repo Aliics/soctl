@@ -1,15 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module SoCtl.Question 
+module SoCtl.Question
     ( question
     , getQuestionResp
     ) where
-import Data.Aeson
-import Data.Maybe
-import Network.HTTP.Query
-import SoCtl.Query.Constants (rootUri)
-import SoCtl.Query (queryUri)
-import SoCtl.Question.Types
+import           Data.Aeson
+import           Data.Maybe
+import           Network.HTTP.Query
+import           SoCtl.Query           (queryUri)
+import           SoCtl.Query.Constants (rootUri)
+import           SoCtl.Question.Types
 
 getQuestionResp :: [String] -> IO (Maybe Question)
 getQuestionResp as = do
@@ -22,5 +22,5 @@ question :: [String] -> IO ()
 question as = do
   resp <- getQuestionResp as
   case resp of
-    Just q -> print q
+    Just q  -> print q
     Nothing -> putStrLn "Question not found"

@@ -1,18 +1,18 @@
-module SoCtl.ArgsSpec 
+module SoCtl.ArgsSpec
     ( spec
     ) where
-import Test.Hspec
-import Data.Maybe
-import SoCtl.Args (argByName)
+import           Data.Maybe
+import           SoCtl.Args (argByName)
+import           Test.Hspec
 
 spec :: Spec
-spec = 
+spec =
   describe "argByName" $ do
     it "can find argument when alone" $ do
       let x = fromJust $ argByName "arg1" ["--arg1", "foo"]
       x `shouldBe` "foo"
     it "can find argument among many" $ do
-      let x = fromJust $ argByName "arg3" 
+      let x = fromJust $ argByName "arg3"
             [ "--arg1", "bar"
             , "--arg2", "baz"
             , "--arg3", "qux"

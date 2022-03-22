@@ -1,15 +1,15 @@
 module SoCtl.Query
     ( queryUri
     ) where
-import SoCtl.Query.Constants
-import Network.HTTP.Query
+import           Network.HTTP.Query
+import           SoCtl.Query.Constants
 
 queryUri :: String -> (String, Query)
-queryUri p = 
+queryUri p =
   (uri, keys)
-  where 
+  where
     uri = rootUri +/+ p
-    keys = 
+    keys =
       [ makeItem "site" "stackoverflow"
       , makeItem "order" "desc"
       , makeItem "sort" "activity"

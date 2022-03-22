@@ -5,9 +5,9 @@ module SoCtl.Question.Types
     , questionFromObject
     , questionFromItemsObject
     ) where
-import Data.Aeson
-import Network.HTTP.Query
-import Data.Maybe (mapMaybe, maybeToList)
+import           Data.Aeson
+import           Data.Maybe         (mapMaybe, maybeToList)
+import           Network.HTTP.Query
 
 data Question = Question Int String deriving Eq
 

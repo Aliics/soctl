@@ -1,8 +1,8 @@
 module SoCtl.SearchSpec
     ( spec
     ) where
-import Test.Hspec
-import SoCtl.Search
+import           SoCtl.Search
+import           Test.Hspec
 
 spec :: Spec
 spec =

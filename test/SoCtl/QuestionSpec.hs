@@ -1,9 +1,9 @@
 module SoCtl.QuestionSpec
     ( spec
     ) where
-import SoCtl.Question
-import SoCtl.Question.Types
-import Test.Hspec
+import           SoCtl.Question
+import           SoCtl.Question.Types
+import           Test.Hspec
 
 spec :: Spec
 spec = do

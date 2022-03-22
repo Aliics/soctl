@@ -1,18 +1,18 @@
-module SoCtl 
-    ( subProg
-    ) where
+module SoCtl
+  ( subProg,) where
 
-import SoCtl.Help (help)
-import SoCtl.Search (search)
-import SoCtl.Question (question)
-import qualified Data.Map.Lazy as Map
-import System.Environment (getArgs)
+import qualified Data.Map.Lazy      as Map
+import           SoCtl.Help         (help)
+import           SoCtl.Question     (question)
+import           SoCtl.Search       (search)
+import           System.Environment (getArgs)
 
 progs :: Map.Map String ([String] -> IO ())
-progs = Map.fromList 
-    [ ("help", help)
-    , ("search", search)
-    , ("question", question)
+progs =
+  Map.fromList
+    [ ("help", help),
+      ("search", search),
+      ("question", question)
     ]
 
 subProg :: IO ()
@@ -27,5 +27,5 @@ callProg as = do
   case maybeProg of
     Just a -> a $ tail as
     Nothing -> do
-      putStrLn $ prog ++ " is not a command.\n" 
+      putStrLn $ prog ++ " is not a command.\n"
       callProg []
