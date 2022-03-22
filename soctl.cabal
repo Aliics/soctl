@@ -30,7 +30,6 @@ library
       SoCtl.Help
       SoCtl.Query
       SoCtl.Query.Constants
-      SoCtl.Query.Response
       SoCtl.Question
       SoCtl.Question.Types
       SoCtl.Search

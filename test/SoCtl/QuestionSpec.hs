@@ -1,7 +1,6 @@
 module SoCtl.QuestionSpec
     ( spec
     ) where
-import SoCtl.Query.Response
 import SoCtl.Question
 import SoCtl.Question.Types
 import Test.Hspec
@@ -15,6 +14,5 @@ spec = do
 
   describe "getQuestionResp" $ do
     it "can query a question" $ do
-      (Response n qs) <- getQuestionResp ["44965"]
-      n `shouldBe` 1
-      qs `shouldBe` [Question 44965 "What is a monad?"]
+      qs <- getQuestionResp ["44965"]
+      qs `shouldBe` Just (Question 44965 "What is a monad?")

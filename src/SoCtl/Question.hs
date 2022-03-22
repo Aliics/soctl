@@ -1,21 +1,26 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module SoCtl.Question 
     ( question
     , getQuestionResp
     ) where
+import Data.Aeson
+import Data.Maybe
 import Network.HTTP.Query
 import SoCtl.Query.Constants (rootUri)
 import SoCtl.Query (queryUri)
-import SoCtl.Query.Response
+import SoCtl.Question.Types
 
-getQuestionResp :: [String] -> IO Response
+getQuestionResp :: [String] -> IO (Maybe Question)
 getQuestionResp as = do
-  let qu = queryUri $ "questions" +/+ head as
+  let uri = "questions" +/+ head as
+      qu = queryUri uri
   res <- uncurry webAPIQuery qu
-  pure $ queryResp res
+  pure $ listToMaybe $ questionFromItemsObject res
 
 question :: [String] -> IO ()
 question as = do
   resp <- getQuestionResp as
   case resp of
-    Response _ (q:_) -> print q
-    _ -> putStrLn "Question not found"
+    Just q -> print q
+    Nothing -> putStrLn "Question not found"

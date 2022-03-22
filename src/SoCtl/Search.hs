@@ -7,24 +7,25 @@ module SoCtl.Search
 import SoCtl.Args (argByName)
 import SoCtl.Query (queryUri)
 import SoCtl.Query.Constants (rootUri)
-import SoCtl.Query.Response
+import SoCtl.Question.Types
+import Data.Aeson
 import Network.HTTP.Query
-import Data.Maybe (maybeToList)
+import Data.Maybe
 
 -- Query the StackExchange api pointing to StackOverflow.
 -- Using the first argument as the language to search against.
-getSearchResp :: [String] -> IO Response
+getSearchResp :: [String] -> IO [Question]
 getSearchResp as = do
   let qu = queryUri "search/advanced"
       uri = fst qu 
       maybeLang = makeItem "tagged" <$> argByName "lang" as
       keys = snd qu ++ maybeToList maybeLang
   res <- webAPIQuery uri keys
-  pure $ queryResp res
+  pure $ questionFromItemsObject res
     
 -- Run the search function as a "prog". This means to simply output the result.
 -- A shorthand to displaying the result in a nice format.
 search :: [String] -> IO ()
 search as = do
-  (Response _ qs) <- getSearchResp as
+  qs <- getSearchResp as
   mapM_ print qs
